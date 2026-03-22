@@ -147,6 +147,23 @@ export function FacilityCard({ facility }: FacilityCardProps) {
       : "";
   const hasLogo = isPremium && logo && logo.trim().length > 0;
 
+  const aggregateRatingLd =
+    typeof rating === "number" &&
+    Number.isFinite(rating) &&
+    rating > 0 &&
+    typeof reviewCount === "number" &&
+    Number.isFinite(reviewCount) &&
+    reviewCount > 0
+      ? {
+          "@type": "AggregateRating" as const,
+          ratingValue: rating,
+          bestRating: 5,
+          worstRating: 0,
+          ratingCount: reviewCount,
+          reviewCount: reviewCount,
+        }
+      : undefined;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -159,24 +176,7 @@ export function FacilityCard({ facility }: FacilityCardProps) {
       ...(city && { addressLocality: city }),
       ...(state && { addressRegion: state }),
     },
-    ...(rating &&
-      typeof rating === "number" &&
-      !Number.isNaN(rating) && {
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: rating,
-          bestRating: 5,
-          worstRating: 0,
-          ratingCount:
-            typeof reviewCount === "number" && reviewCount >= 0
-              ? reviewCount
-              : 0,
-          reviewCount:
-            typeof reviewCount === "number" && reviewCount >= 0
-              ? reviewCount
-              : 0,
-        },
-      }),
+    ...(aggregateRatingLd && { aggregateRating: aggregateRatingLd }),
     ...(id && { identifier: id }),
   };
 
