@@ -2,8 +2,11 @@ import type { Facility } from "@/components/FacilityCard";
 import fs from "fs";
 import path from "path";
 
-/** All provinces & territories with `data/{slug}_facilities.json` */
-const CANADA_PROVINCE_SLUGS = [
+/**
+ * All provinces & territories that may have `data/{slug}_facilities.json`.
+ * Loaded in batch via discover + readFileSync (try/catch → [] per file).
+ */
+const ALL_CANADA_PROVINCE_SLUGS = [
   "alberta",
   "british-columbia",
   "manitoba",
@@ -18,6 +21,24 @@ const CANADA_PROVINCE_SLUGS = [
   "saskatchewan",
   "yukon",
 ] as const;
+
+const CANADA_SLUG_SET = new Set<string>(ALL_CANADA_PROVINCE_SLUGS);
+
+function discoverCanadaProvinceSlugsFromData(): string[] {
+  const dataDir = path.join(process.cwd(), "data");
+  let entries: string[] = [];
+  try {
+    entries = fs.readdirSync(dataDir);
+  } catch {
+    return [];
+  }
+  const suffix = "_facilities.json";
+  return entries
+    .filter((name) => name.endsWith(suffix))
+    .map((name) => name.slice(0, -suffix.length))
+    .filter((slug) => slug.length > 0 && CANADA_SLUG_SET.has(slug))
+    .sort((a, b) => a.localeCompare(b));
+}
 
 const PROVINCE_DISPLAY_NAMES: Record<string, string> = {
   alberta: "Alberta",
@@ -58,8 +79,10 @@ type CanadaFacilityRaw = {
   care_type?: string;
   address: string;
   city: string;
-  province: string;
-  country: string;
+  /** Some exports use `state` for the province name (e.g. Alberta). */
+  province?: string;
+  state?: string;
+  country?: string;
   phone?: string | null;
   website?: string | null;
   rating?: number | null;
@@ -158,7 +181,7 @@ function transformCanadaFacilities(
     const fullAddress = (f.address ?? "").trim();
     const pid = f.place_id?.trim();
     const mapsUrl = pid
-      ? `https://search.google.com/local/reviews?placeid=${pid}&q=*&authuser=0&hl=en&gl=CA`
+      ? `https://www.google.com/maps/place/?q=${encodeURIComponent(`place_id:${pid}`)}`
       : fullAddress
         ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`
         : undefined;
@@ -187,10 +210,12 @@ function transformCanadaFacilities(
 }
 
 const PROVINCE_DATA: Record<string, CanadaRawFacility[]> = {};
-for (const slug of CANADA_PROVINCE_SLUGS) {
+for (const slug of discoverCanadaProvinceSlugsFromData()) {
   const raw = loadCanadaProvinceRawArray(slug);
   const provinceName =
-    (raw[0]?.province ?? "").trim() || PROVINCE_DISPLAY_NAMES[slug] || slug;
+    (raw[0]?.province ?? raw[0]?.state ?? "").trim() ||
+    PROVINCE_DISPLAY_NAMES[slug] ||
+    slug;
   PROVINCE_DATA[slug] = transformCanadaFacilities(raw, provinceName, slug);
 }
 
@@ -223,7 +248,7 @@ export function getCanadaNationwideStats(): {
   averageRating: number | null;
 } {
   const { totalFacilities, totalCities, ratings } = getCanadaStatsForGlobal();
-  const provinceCount = CANADA_PROVINCE_SLUGS.length;
+  const provinceCount = Object.keys(PROVINCE_DATA).length;
   const averageRating =
     ratings.length > 0
       ? Number(

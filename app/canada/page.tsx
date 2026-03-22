@@ -10,14 +10,14 @@ const siteUrl = "https://pediatriciandirectories.com";
 export const metadata: Metadata = {
   title: "Pediatrician Practices in Canada | Provincial Directories | Pediatrician Directories",
   description:
-    "Browse verified pediatrician practices across Canadian provinces. fine motor skills, sensory processing, daily living activities, and more — all rated 3 stars or higher.",
+    "Browse verified pediatrician practices across Canadian provinces and territories — all rated 3 stars or higher on Google Maps.",
   alternates: {
     canonical: "/canada",
   },
   openGraph: {
     title: "Pediatrician Practices in Canada | Provincial Directories | Pediatrician Directories",
     description:
-      "Browse verified pediatrician practices across Canadian provinces. fine motor skills, sensory processing, daily living activities, and more.",
+      "Browse verified pediatrician practices across Canadian provinces and territories.",
     url: "/canada",
     siteName: "PediatricianDirectories.com",
     type: "website",
@@ -48,7 +48,7 @@ export default async function CanadaLandingPage() {
               Pediatrician Practices in Canada — Province by Province
             </h1>
             <p className="max-w-2xl text-balance text-sm sm:text-base text-surface/80">
-              Verified pediatrician practices and services across Canadian provinces.
+              Verified pediatrician practices and services across provinces and territories.
               Every practice rated 3★ or higher on Google Maps.
             </p>
           </div>
