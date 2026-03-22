@@ -30,8 +30,8 @@ export const metadata: Metadata = {
 };
 
 const siteUrl = "https://occupationaltherapydirectories.com";
-const STRIPE_LINK_49 = "https://buy.stripe.com/dRmcN58Ui9LNccmg5XfAc06";
-const STRIPE_LINK_99 = "https://buy.stripe.com/5kQ5kD5I66zBa4e6vnfAc07";
+const STRIPE_LINK_49 = "https://buy.stripe.com/6oU9AT1rQ7DF5NYdXPfAc0c";
+const STRIPE_LINK_99 = "https://buy.stripe.com/3cI9ATfiGe2390a06ZfAc0d";
 
 export default function AdvertisePage() {
   const breadcrumbSchema = {
