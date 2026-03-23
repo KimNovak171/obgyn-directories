@@ -37,7 +37,7 @@ export default async function Home() {
     getCanadaDirectoryIndex(),
   ]);
   const usStatesSorted = [...usDirectory].sort((a, b) =>
-    a.stateName.localeCompare(b.stateName),
+    a.stateName.localeCompare(b.stateName, "en", { sensitivity: "base" }),
   );
   const stateSummaries = await Promise.all(
     usDirectory.map((s) => getStateSummary(s.stateSlug)),

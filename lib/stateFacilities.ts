@@ -220,6 +220,11 @@ function normalizeStateFacilitiesJson(
   return null;
 }
 
+/**
+ * Each US state file is loaded with `fs.readFileSync` inside try/catch.
+ * Any failure (missing file, invalid JSON, empty normalized payload) returns `[]`.
+ * Never assign a hardcoded empty array for a state in source — only the catch/fallback paths.
+ */
 function loadUsStateFacilities(stateSlug: string): RawFacility[] {
   const filePath = path.join(
     process.cwd(),
@@ -241,6 +246,7 @@ function loadUsStateFacilities(stateSlug: string): RawFacility[] {
   }
 }
 
+/** Batch-load every discovered US `*_facilities.json` at module init (single pass). */
 const STATE_DATA: Record<string, RawFacility[]> = {};
 for (const slug of US_STATE_SLUGS) {
   STATE_DATA[slug] = loadUsStateFacilities(slug);
@@ -475,12 +481,16 @@ export async function getDirectoryIndex(): Promise<
   const summaries = await Promise.all(
     stateSlugs.map((slug) => getStateSummary(slug)),
   );
-  return summaries.map((summary) => ({
-    stateSlug: summary.stateSlug,
-    stateName: summary.stateName,
-    totalFacilities: summary.totalFacilities,
-    cities: summary.cities,
-  }));
+  return summaries
+    .map((summary) => ({
+      stateSlug: summary.stateSlug,
+      stateName: summary.stateName,
+      totalFacilities: summary.totalFacilities,
+      cities: summary.cities,
+    }))
+    .sort((a, b) =>
+      a.stateName.localeCompare(b.stateName, "en", { sensitivity: "base" }),
+    );
 }
 
 export type GlobalStats = {
