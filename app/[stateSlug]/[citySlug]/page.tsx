@@ -8,7 +8,7 @@ import {
   getOtherCitiesInState,
 } from "@/lib/stateFacilities";
 
-const siteUrl = "https://pediatriciandirectories.com";
+const siteUrl = "https://familydoctordirectories.com";
 
 type CityPageProps = {
   params: Promise<{ stateSlug: string; citySlug: string }>;
@@ -27,8 +27,8 @@ export async function generateMetadata({
   const { stateName, cityName, facilities: cityFacilities } =
     await getCityFacilities(safeState, safeCity);
   const count = Array.isArray(cityFacilities) ? cityFacilities.length : 0;
-  const title = `Pediatrician Practices in ${cityName}, ${stateName} | Pediatrician Directories`;
-  const description = `Find ${count.toLocaleString()} pediatrician practices in ${cityName}, ${stateName}. Compare services and practice details. Verified listings with ratings and reviews.`;
+  const title = `Family Doctor Practices in ${cityName}, ${stateName} | Family Doctor Directories`;
+  const description = `Find ${count.toLocaleString()} family-doctor practices in ${cityName}, ${stateName}. Compare services and practice details. Verified listings with ratings and reviews.`;
 
   return {
     title,
@@ -43,14 +43,14 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalPath,
-      siteName: "PediatricianDirectories.com",
+      siteName: "FamilyDoctorDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${cityName}, ${stateName} pediatrician practice directory preview`,
+          alt: `${cityName}, ${stateName} family-doctor practice directory preview`,
         },
       ],
     },
@@ -101,7 +101,7 @@ export default async function CityPage({ params }: CityPageProps) {
   const careTypesText =
     careTypes.length > 0
       ? careTypes.slice(0, 4).join(", ")
-      : "pediatrician services";
+      : "family-doctor services";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -110,7 +110,7 @@ export default async function CityPage({ params }: CityPageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "PediatricianDirectories.com",
+        name: "FamilyDoctorDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -131,21 +131,21 @@ export default async function CityPage({ params }: CityPageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Pediatrician Practices in ${cityName}, ${stateName}`,
+    name: `Family Doctor Practices in ${cityName}, ${stateName}`,
     url: `${siteUrl}/${stateSlugNorm}/${citySlugNorm}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "PediatricianDirectories.com",
+      name: "FamilyDoctorDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
       {
         "@type": "Thing",
-        name: `${cityName} pediatrician practices`,
+        name: `${cityName} family-doctor practices`,
       },
       {
         "@type": "Thing",
-        name: `${stateName} pediatrician services`,
+        name: `${stateName} family-doctor services`,
       },
       {
         "@type": "Thing",
@@ -182,14 +182,14 @@ export default async function CityPage({ params }: CityPageProps) {
       />
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          Pediatrician by city
+          Family Doctor by city
         </p>
         <h1 className="text-3xl font-semibold text-navy">
-          Pediatrician Practices in {cityName}, {stateName}
+          Family Doctor Practices in {cityName}, {stateName}
         </h1>
         <p className="max-w-2xl text-sm text-slate-600">
           {cityName} has {facilities.length.toLocaleString()} verified
-          pediatrician practices including {careTypesText}. Browse all options
+          family-doctor practices including {careTypesText}. Browse all options
           below, each with Google Maps profile links and ratings data where
           available.
         </p>

@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About This Directory | Pediatrician Directories",
+  title: "About This Directory | Family Doctor Directories",
   description:
-    "Learn about PediatricianDirectories.com — a trusted directory helping caregivers compare pediatrician practices and services across the US and Canada.",
+    "Learn about FamilyDoctorDirectories.com — a trusted directory helping caregivers compare family-doctor practices and services across the US and Canada.",
   alternates: {
     canonical: "/about",
     languages: {
-      "en-us": "https://pediatriciandirectories.com/about",
+      "en-us": "https://familydoctordirectories.com/about",
     },
   },
   openGraph: {
-    title: "About This Directory | Pediatrician Directories",
+    title: "About This Directory | Family Doctor Directories",
     url: "/about",
-    siteName: "PediatricianDirectories.com",
+    siteName: "FamilyDoctorDirectories.com",
     type: "website",
   },
 };
@@ -30,19 +30,19 @@ export default function AboutPage() {
           About This Directory
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
-          PediatricianDirectories.com is a professional, easy-to-use directory that helps caregivers find and compare pediatrician practice options across the United States and Canada.
+          FamilyDoctorDirectories.com is a professional, easy-to-use directory that helps caregivers find and compare family-doctor practice options across the United States and Canada.
         </p>
       </header>
 
       <div className="mt-10 max-w-3xl space-y-6 text-sm text-slate-700">
         <p>
-          We list verified pediatrician practices and services — so you can explore options by state and city, compare contact details and ratings, and make informed decisions. Our listings are sourced from public information and verified where possible; we encourage you to confirm certifications and quality with your state or provincial authority and to visit practices in person when possible.
+          We list verified family-doctor practices and services — so you can explore options by state and city, compare contact details and ratings, and make informed decisions. Our listings are sourced from public information and verified where possible; we encourage you to confirm certifications and quality with your state or provincial authority and to visit practices in person when possible.
         </p>
         <p>
           This site is for informational purposes only. We do not endorse any specific facility. Always verify licensing, inspections, and accreditation with the appropriate regulatory body in your area.
         </p>
         <p>
-          Pediatrician practice owners can learn about featured and premium listings on our{" "}
+          Family Doctor practice owners can learn about featured and premium listings on our{" "}
           <Link href="/advertise" className="font-medium text-teal hover:text-teal-soft">
             Advertise
           </Link>{" "}

@@ -16,29 +16,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pediatriciandirectories.com"),
+  metadataBase: new URL("https://familydoctordirectories.com"),
   title: {
-    default: "PediatricianDirectories.com | Pediatrician Directory",
-    template: "%s | PediatricianDirectories.com",
+    default: "FamilyDoctorDirectories.com | Family Doctor Directory",
+    template: "%s | FamilyDoctorDirectories.com",
   },
   description:
-    "PediatricianDirectories.com is a professional, easy-to-use Pediatrician directory helping families find local pediatricians and services across the United States and Canada.",
+    "FamilyDoctorDirectories.com is a professional, easy-to-use Family Doctor directory helping families find local family-doctors and services across the United States and Canada.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "PediatricianDirectories.com | Pediatrician Directory",
+    title: "FamilyDoctorDirectories.com | Family Doctor Directory",
     description:
-      "Trusted resource to explore and compare pediatricians and services across North America.",
+      "Trusted resource to explore and compare family-doctors and services across North America.",
     url: "/",
-    siteName: "PediatricianDirectories.com",
+    siteName: "FamilyDoctorDirectories.com",
     type: "website",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "PediatricianDirectories.com logo preview",
+        alt: "FamilyDoctorDirectories.com logo preview",
       },
     ],
   },
@@ -69,9 +69,9 @@ export default async function RootLayout({
                 <Link
                   href="/"
                   className="text-[11px] font-bold tracking-[0.28em] sm:text-xs text-white hover:text-teal-soft transition-colors"
-                  aria-label="PediatricianDirectories.com – go to homepage"
+                  aria-label="FamilyDoctorDirectories.com – go to homepage"
                 >
-                  PediatricianDirectories.com
+                  FamilyDoctorDirectories.com
                 </Link>
                 <nav className="flex items-center gap-4" aria-label="Main navigation">
                   <Link
@@ -101,7 +101,7 @@ export default async function RootLayout({
                 </nav>
               </div>
               <p className="ml-4 hidden max-w-xs text-right text-xs text-white/90 sm:block">
-                Trusted Pediatrician directory for families and caregivers.
+                Trusted Family Doctor directory for families and caregivers.
               </p>
             </div>
           </header>
@@ -181,7 +181,7 @@ export default async function RootLayout({
           <footer className="w-full border-t border-teal/10 bg-surface">
             <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 text-xs text-foreground/80 sm:px-6 lg:px-8">
               <p>
-                © {new Date().getFullYear()} PediatricianDirectories.com. For
+                © {new Date().getFullYear()} FamilyDoctorDirectories.com. For
                 informational purposes only – always verify licensing,
                 certifications, and safety requirements with your local authority.
               </p>
@@ -199,7 +199,7 @@ export default async function RootLayout({
                   Advertise
                 </Link>
                 <Link href="/advertise" className="hover:text-teal-soft">
-                  For pediatricians
+                  For family doctors
                 </Link>
                 <Link href="/advertise" className="hover:text-teal-soft">
                   Featured Listing

@@ -7,7 +7,7 @@ import {
   getOtherCitiesInProvince,
 } from "@/lib/canadaFacilities";
 
-const siteUrl = "https://pediatriciandirectories.com";
+const siteUrl = "https://familydoctordirectories.com";
 
 type CanadaCityPageProps = {
   params: Promise<{ provinceSlug: string; citySlug: string }>;
@@ -24,8 +24,8 @@ export async function generateMetadata({
   const { provinceName, cityName, facilities: cityFacilities } =
     await getCanadaCityFacilities(safeProvince, safeCity);
   const count = Array.isArray(cityFacilities) ? cityFacilities.length : 0;
-  const title = `Pediatrician Practices in ${cityName}, ${provinceName}, Canada | Pediatrician Directories`;
-  const description = `Find ${count.toLocaleString()} pediatrician practices in ${cityName}, ${provinceName}. Compare services and practice details. Verified listings with ratings and reviews.`;
+  const title = `Family Doctor Practices in ${cityName}, ${provinceName}, Canada | Family Doctor Directories`;
+  const description = `Find ${count.toLocaleString()} family-doctor practices in ${cityName}, ${provinceName}. Compare services and practice details. Verified listings with ratings and reviews.`;
 
   return {
     title,
@@ -37,14 +37,14 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalPath,
-      siteName: "PediatricianDirectories.com",
+      siteName: "FamilyDoctorDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${cityName}, ${provinceName} pediatrician practice directory preview`,
+          alt: `${cityName}, ${provinceName} family-doctor practice directory preview`,
         },
       ],
     },
@@ -94,7 +94,7 @@ export default async function CanadaCityPage({ params }: CanadaCityPageProps) {
   const careTypesText =
     careTypes.length > 0
       ? careTypes.slice(0, 4).join(", ")
-      : "pediatrician services";
+      : "family-doctor services";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -103,7 +103,7 @@ export default async function CanadaCityPage({ params }: CanadaCityPageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "PediatricianDirectories.com",
+        name: "FamilyDoctorDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -130,16 +130,16 @@ export default async function CanadaCityPage({ params }: CanadaCityPageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Pediatrician Practices in ${cityName}, ${provinceName}, Canada`,
+    name: `Family Doctor Practices in ${cityName}, ${provinceName}, Canada`,
     url: `${siteUrl}/canada/${provinceSlugNorm}/${citySlugNorm}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "PediatricianDirectories.com",
+      name: "FamilyDoctorDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
-      { "@type": "Thing", name: `${cityName} pediatrician practices` },
-      { "@type": "Thing", name: `${provinceName} pediatrician services` },
+      { "@type": "Thing", name: `${cityName} family-doctor practices` },
+      { "@type": "Thing", name: `${provinceName} family-doctor services` },
       { "@type": "Thing", name: "Functional assessment" },
       { "@type": "Thing", name: "Daily living skills" },
       { "@type": "Thing", name: "Sensory integration" },
@@ -162,14 +162,14 @@ export default async function CanadaCityPage({ params }: CanadaCityPageProps) {
       />
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          Pediatrician by city
+          Family Doctor by city
         </p>
         <h1 className="text-3xl font-semibold text-navy">
-          Pediatrician Practices in {cityName}, {provinceName}
+          Family Doctor Practices in {cityName}, {provinceName}
         </h1>
         <p className="max-w-2xl text-sm text-slate-600">
           {cityName} has {facilities.length.toLocaleString()} verified
-          pediatrician practices including {careTypesText}. Browse all options below,
+          family-doctor practices including {careTypesText}. Browse all options below,
           each with Google Maps profile links and ratings data where available.
         </p>
         <p className="max-w-2xl text-sm text-slate-600">

@@ -2,34 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Advertise | Get Your Pediatrician Practice in Front of Families",
+  title: "Advertise | Get Your Family Doctor Practice in Front of Families",
   description:
-    "Featured and premium listings on PediatricianDirectories.com. Reach Families actively searching for Pediatrician Practices and services across the United States.",
+    "Featured and premium listings on FamilyDoctorDirectories.com. Reach Families actively searching for Family Doctor Practices and services across the United States.",
   alternates: {
     canonical: "/advertise",
     languages: {
-      "en-us": "https://pediatriciandirectories.com/advertise",
+      "en-us": "https://familydoctordirectories.com/advertise",
     },
   },
   openGraph: {
-    title: "Advertise | Get Your Pediatrician Practice in Front of Families",
+    title: "Advertise | Get Your Family Doctor Practice in Front of Families",
     description:
-      "A featured listing puts your practice at the top of your city directory section and in front of high-intent visitors at the moment they are choosing a pediatrician service.",
+      "A featured listing puts your practice at the top of your city directory section and in front of high-intent visitors at the moment they are choosing a family-doctor service.",
     url: "/advertise",
-    siteName: "PediatricianDirectories.com",
+    siteName: "FamilyDoctorDirectories.com",
     type: "website",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "PediatricianDirectories.com advertise page preview",
+        alt: "FamilyDoctorDirectories.com advertise page preview",
       },
     ],
   },
 };
 
-const siteUrl = "https://pediatriciandirectories.com";
+const siteUrl = "https://familydoctordirectories.com";
 const STRIPE_LINK_49 = "https://buy.stripe.com/dRm6oH2vU0bdccm9HzfAc0e";
 const STRIPE_LINK_99 = "https://buy.stripe.com/14AcN59YmbTV4JU1b3fAc0f";
 
@@ -41,7 +41,7 @@ export default function AdvertisePage() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "PediatricianDirectories.com",
+        name: "FamilyDoctorDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -62,16 +62,16 @@ export default function AdvertisePage() {
 
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          For Pediatrician Practice Owners
+          For Family Doctor Practice Owners
         </p>
         <h1 className="text-3xl font-semibold text-navy sm:text-4xl">
           Get Your Practice in Front of Families Who Are Ready to Choose
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
-          PediatricianDirectories.com is visited by Families actively searching for
-          pediatrician options across the United States. A featured listing puts
+          FamilyDoctorDirectories.com is visited by Families actively searching for
+          family-doctor options across the United States. A featured listing puts
           your practice at the top of your city directory section and in front of
-          high-intent visitors at the moment they are choosing a pediatrician service.
+          high-intent visitors at the moment they are choosing a family-doctor service.
         </p>
       </header>
 
@@ -121,10 +121,10 @@ export default function AdvertisePage() {
         <p className="text-sm text-slate-700">
           To get started or ask questions, contact us at{" "}
           <a
-            href="mailto:support@pediatriciandirectories.com"
+            href="mailto:support@familydoctordirectories.com"
             className="font-medium text-teal underline underline-offset-2 hover:text-teal-soft"
           >
-            support@pediatriciandirectories.com
+            support@familydoctordirectories.com
           </a>{" "}
           — we&apos;ll have your listing live within 24 hours.
         </p>
