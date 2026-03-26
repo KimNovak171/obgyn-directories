@@ -8,7 +8,7 @@ import {
   getStateSummary,
 } from "@/lib/stateFacilities";
 
-const siteUrl = "https://dentistrydirectories.com";
+const siteUrl = "https://urgentcaredirectories.com";
 
 type StatePageProps = {
   params: Promise<{ stateSlug: string }>;
@@ -25,9 +25,9 @@ export async function generateMetadata({
 
   const { stateName, totalFacilities, cities } = await getStateSummary(safeSlug);
 
-  const title = `Dental Practices in ${stateName} | ${totalFacilities.toLocaleString()} Verified Practices | DentistryDirectories.com`;
+  const title = `Urgent Care Clinics in ${stateName} | ${totalFacilities.toLocaleString()} Verified Practices | UrgentCareDirectories.com`;
 
-  const descriptor = `Browse ${totalFacilities.toLocaleString()} verified dental practices across ${cities.length.toLocaleString()} ${stateName} cities. Find dentists and dental specialists — all rated 3 stars or higher on Google Maps.`;
+  const descriptor = `Browse ${totalFacilities.toLocaleString()} verified urgent care clinics across ${cities.length.toLocaleString()} ${stateName} cities. Find walk-in clinics and urgent care providers — all rated 3 stars or higher on Google Maps.`;
 
   return {
     title,
@@ -42,14 +42,14 @@ export async function generateMetadata({
       title,
       description: descriptor,
       url: canonicalPath,
-      siteName: "DentistryDirectories.com",
+      siteName: "UrgentCareDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${stateName} dental practice directory preview`,
+          alt: `${stateName} urgent care clinic directory preview`,
         },
       ],
     },
@@ -73,8 +73,8 @@ export default async function StatePage({ params }: StatePageProps) {
     careTypes,
   } = await getStateSummary(stateSlug ?? "");
   const resourcesUrl = getStateResourcesUrl(resolvedStateSlug);
-  const dentalCareFocusText =
-    "general dentistry, preventive care, cosmetic dentistry, and restorative dentistry";
+  const urgentCareFocusText =
+    "urgent care visits, preventive care guidance, minor injury treatment, and common illness treatment";
   const majorCities = [...cities]
     .sort((a, b) => b.facilityCount - a.facilityCount)
     .slice(0, 6)
@@ -86,7 +86,7 @@ export default async function StatePage({ params }: StatePageProps) {
   const careTypesSentence =
     topCareTypes.length > 0
       ? topCareTypes.join(", ")
-      : "general dentistry, preventive care, restorative care, and cosmetic dentistry";
+      : "urgent care visits, preventive care guidance, minor injury treatment, and common illness treatment";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -95,7 +95,7 @@ export default async function StatePage({ params }: StatePageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "DentistryDirectories.com",
+        name: "UrgentCareDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -113,7 +113,7 @@ export default async function StatePage({ params }: StatePageProps) {
     mainEntity: [
       {
         "@type": "Question",
-        name: `How many dental practices are in ${stateName}?`,
+        name: `How many urgent care clinics are in ${stateName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `Our directory lists ${totalFacilities.toLocaleString()} verified facilities across ${cities.length.toLocaleString()} cities.`,
@@ -121,7 +121,7 @@ export default async function StatePage({ params }: StatePageProps) {
       },
       {
         "@type": "Question",
-        name: `What types of dental services are available in ${stateName}?`,
+        name: `What types of urgent care services are available in ${stateName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `${careTypesSentence}.`,
@@ -129,10 +129,10 @@ export default async function StatePage({ params }: StatePageProps) {
       },
       {
         "@type": "Question",
-        name: "How are practices selected for this directory?",
+        name: "How are clinics selected for this directory?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "All practices are sourced from Google Maps, verified, and must have a minimum 3-star rating.",
+          text: "All clinics are sourced from Google Maps, verified, and must have a minimum 3-star rating.",
         },
       },
     ],
@@ -141,29 +141,29 @@ export default async function StatePage({ params }: StatePageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Dental Practices in ${stateName}`,
+    name: `Urgent Care Clinics in ${stateName}`,
     url: `${siteUrl}/${resolvedStateSlug}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "DentistryDirectories.com",
+      name: "UrgentCareDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
       {
         "@type": "Thing",
-        name: `${stateName} dental practices`,
+        name: `${stateName} urgent care clinics`,
       },
       {
         "@type": "Thing",
-        name: "General dentistry",
+        name: "General urgent care",
       },
       {
         "@type": "Thing",
-        name: "Dental care",
+        name: "Urgent care services",
       },
       {
         "@type": "Thing",
-        name: "Cosmetic dentistry",
+        name: "Minor injury treatment",
       },
       {
         "@type": "Thing",
@@ -210,11 +210,11 @@ export default async function StatePage({ params }: StatePageProps) {
           State overview
         </p>
         <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
-          Dental Practices in {stateName}
+          Urgent Care Clinics in {stateName}
         </h1>
         <p className="mt-3 max-w-2xl text-sm text-foreground/80">
-          Explore {dentalCareFocusText} across {stateName}, including major city
-          areas such as {majorCitiesText}. Use this page to find dentists by city,
+          Explore {urgentCareFocusText} across {stateName}, including major city
+          areas such as {majorCitiesText}. Use this page to find urgent care providers by city,
           then review{" "}
           <a
             href={resourcesUrl}
@@ -222,9 +222,9 @@ export default async function StatePage({ params }: StatePageProps) {
             rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-gold-soft"
           >
-            official {stateName} dental care consumer resources
+            official {stateName} healthcare consumer resources
           </a>{" "}
-          for finding qualified dentists and understanding your options.
+          for finding qualified urgent care providers and understanding your options.
         </p>
 
         <div className="mt-5 grid gap-4 text-sm sm:grid-cols-3">
@@ -284,12 +284,12 @@ export default async function StatePage({ params }: StatePageProps) {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy border-b-2 border-teal/50 pb-1 inline-block">
-              Dental Practices by City in {stateName}
+              Urgent Care Clinics by City in {stateName}
             </h2>
             <p className="mt-1 max-w-2xl text-sm text-slate-600">
-              Choose a city to browse dentists and dental practices in{" "}
+              Choose a city to browse urgent care providers and urgent care clinics in{" "}
               {stateName}, including routine visits, preventive care, and
-              restorative and periodontal care.
+              minor injury treatment.
             </p>
           </div>
           <div className="text-xs text-slate-500">

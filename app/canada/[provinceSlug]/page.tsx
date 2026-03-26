@@ -6,7 +6,7 @@ import {
   getProvinceSummary,
 } from "@/lib/canadaFacilities";
 
-const siteUrl = "https://dentistrydirectories.com";
+const siteUrl = "https://urgentcaredirectories.com";
 
 type ProvincePageProps = {
   params: Promise<{ provinceSlug: string }>;
@@ -23,8 +23,8 @@ export async function generateMetadata({
     safeSlug,
   );
 
-  const title = `Dental Practices in ${provinceName}, Canada | Dentistry Directories`;
-  const descriptor = `Find ${totalFacilities.toLocaleString()} dental practices in ${provinceName}, Canada. Compare services and practice details. Verified listings with ratings and reviews.`;
+  const title = `Urgent Care Clinics in ${provinceName}, Canada | Urgent Care Directories`;
+  const descriptor = `Find ${totalFacilities.toLocaleString()} urgent care clinics in ${provinceName}, Canada. Compare services and practice details. Verified listings with ratings and reviews.`;
 
   return {
     title,
@@ -36,14 +36,14 @@ export async function generateMetadata({
       title,
       description: descriptor,
       url: canonicalPath,
-      siteName: "DentistryDirectories.com",
+      siteName: "UrgentCareDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${provinceName} dental practice directory preview`,
+          alt: `${provinceName} urgent care clinic directory preview`,
         },
       ],
     },
@@ -67,8 +67,8 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
     careTypes,
   } = await getProvinceSummary(provinceSlug ?? "");
 
-  const dentalCareFocusText =
-    "general dentistry, preventive care, cosmetic dentistry, and restorative dentistry";
+  const urgentCareFocusText =
+    "urgent care visits, preventive care guidance, minor injury treatment, and common illness treatment";
   const majorCities = [...cities]
     .sort((a, b) => b.facilityCount - a.facilityCount)
     .slice(0, 6)
@@ -80,7 +80,7 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
   const careTypesSentence =
     topCareTypes.length > 0
       ? topCareTypes.join(", ")
-      : "general dentistry, preventive care, restorative care, and cosmetic dentistry";
+      : "urgent care visits, preventive care guidance, minor injury treatment, and common illness treatment";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -89,7 +89,7 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "DentistryDirectories.com",
+        name: "UrgentCareDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -113,7 +113,7 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
     mainEntity: [
       {
         "@type": "Question",
-        name: `How many dental practices are in ${provinceName}?`,
+        name: `How many urgent care clinics are in ${provinceName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `Our directory lists ${totalFacilities.toLocaleString()} verified facilities across ${cities.length.toLocaleString()} cities.`,
@@ -121,7 +121,7 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
       },
       {
         "@type": "Question",
-        name: `What types of dental services are available in ${provinceName}?`,
+        name: `What types of urgent care services are available in ${provinceName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `${careTypesSentence}.`,
@@ -129,10 +129,10 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
       },
       {
         "@type": "Question",
-        name: "How are practices selected for this directory?",
+        name: "How are clinics selected for this directory?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "All practices are sourced from Google Maps, verified, and must have a minimum 3-star rating.",
+          text: "All clinics are sourced from Google Maps, verified, and must have a minimum 3-star rating.",
         },
       },
     ],
@@ -141,18 +141,18 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Dental Practices in ${provinceName}, Canada`,
+    name: `Urgent Care Clinics in ${provinceName}, Canada`,
     url: `${siteUrl}/canada/${resolvedProvinceSlug}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "DentistryDirectories.com",
+      name: "UrgentCareDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
-      { "@type": "Thing", name: `${provinceName} dental practices` },
-      { "@type": "Thing", name: "General dentistry" },
-      { "@type": "Thing", name: "Dental care" },
-      { "@type": "Thing", name: "Cosmetic dentistry" },
+      { "@type": "Thing", name: `${provinceName} urgent care clinics` },
+      { "@type": "Thing", name: "General urgent care" },
+      { "@type": "Thing", name: "Urgent care services" },
+      { "@type": "Thing", name: "Minor injury treatment" },
       { "@type": "Thing", name: "Preventive care" },
     ],
     speakable: {
@@ -195,11 +195,11 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
           Province overview
         </p>
         <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
-          Dental Practices in {provinceName}, Canada
+          Urgent Care Clinics in {provinceName}, Canada
         </h1>
         <p className="mt-3 max-w-2xl text-sm text-foreground/80">
-          Explore {dentalCareFocusText} across {provinceName}, including major
-          city areas such as {majorCitiesText}. Use this page to find dentists by
+          Explore {urgentCareFocusText} across {provinceName}, including major
+          city areas such as {majorCitiesText}. Use this page to find urgent care providers by
           city.
         </p>
 
@@ -261,12 +261,12 @@ export default async function ProvincePage({ params }: ProvincePageProps) {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy border-b-2 border-teal/50 pb-1 inline-block">
-              Dental Practices by City in {provinceName}
+              Urgent Care Clinics by City in {provinceName}
             </h2>
             <p className="mt-1 max-w-2xl text-sm text-slate-600">
-              Choose a city to browse dentists and
-              dental practices in {provinceName}, including routine visits,
-              preventive care, and restorative and periodontal care.
+              Choose a city to browse urgent care providers and
+              urgent care clinics in {provinceName}, including routine visits,
+              preventive care, and minor injury treatment.
             </p>
           </div>
           <div className="text-xs text-slate-500">

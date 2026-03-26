@@ -21,7 +21,6 @@ type FacilityCardProps = {
   facility: Facility;
 };
 
-/** Single badge color for all care-type labels (dental directory). */
 const CARE_TYPE_BADGE_COLOR = "#1d4ed8";
 
 function truncateToWords(text: string, maxWords: number): string {

@@ -16,29 +16,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dentistrydirectories.com"),
+  metadataBase: new URL("https://urgentcaredirectories.com"),
   title: {
-    default: "DentistryDirectories.com | Dental Directory",
-    template: "%s | DentistryDirectories.com",
+    default: "UrgentCareDirectories.com | Urgent Care Directory",
+    template: "%s | UrgentCareDirectories.com",
   },
   description:
-    "DentistryDirectories.com is a professional, easy-to-use dental directory helping patients and families find local dentists and dental services across the United States and Canada.",
+    "UrgentCareDirectories.com is a professional, easy-to-use urgent care directory helping patients and families find local urgent care providers and urgent care services across the United States and Canada.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "DentistryDirectories.com | Dental Directory",
+    title: "UrgentCareDirectories.com | Urgent Care Directory",
     description:
-      "Trusted resource to explore and compare dentists and dental services across North America.",
+      "Trusted resource to explore and compare urgent care providers and urgent care services across North America.",
     url: "/",
-    siteName: "DentistryDirectories.com",
+    siteName: "UrgentCareDirectories.com",
     type: "website",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "DentistryDirectories.com logo preview",
+        alt: "UrgentCareDirectories.com logo preview",
       },
     ],
   },
@@ -69,9 +69,9 @@ export default async function RootLayout({
                 <Link
                   href="/"
                   className="text-[11px] font-bold tracking-[0.28em] sm:text-xs text-white hover:text-teal-soft transition-colors"
-                  aria-label="DentistryDirectories.com – go to homepage"
+                  aria-label="UrgentCareDirectories.com – go to homepage"
                 >
-                  DentistryDirectories.com
+                  UrgentCareDirectories.com
                 </Link>
                 <nav className="flex items-center gap-4" aria-label="Main navigation">
                   <Link
@@ -101,7 +101,7 @@ export default async function RootLayout({
                 </nav>
               </div>
               <p className="ml-4 hidden max-w-xs text-right text-xs text-white/90 sm:block">
-                Trusted dental directory for patients and families.
+                Trusted urgent care directory for patients and families.
               </p>
             </div>
           </header>
@@ -181,7 +181,7 @@ export default async function RootLayout({
           <footer className="w-full border-t border-teal/10 bg-surface">
             <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 text-xs text-foreground/80 sm:px-6 lg:px-8">
               <p>
-                © {new Date().getFullYear()} DentistryDirectories.com. For
+                © {new Date().getFullYear()} UrgentCareDirectories.com. For
                 informational purposes only – always verify licensing,
                 certifications, and safety requirements with your local authority.
               </p>
@@ -199,7 +199,7 @@ export default async function RootLayout({
                   Advertise
                 </Link>
                 <Link href="/advertise" className="hover:text-teal-soft">
-                  For dentists
+                  For urgent care providers
                 </Link>
                 <Link href="/advertise" className="hover:text-teal-soft">
                   Featured Listing

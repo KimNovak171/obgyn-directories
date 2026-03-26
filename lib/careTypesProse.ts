@@ -1,47 +1,28 @@
 /**
  * Turn raw Google-style category labels into short, natural phrases for prose
- * (e.g. city page intros). Omits entries that do not look dental-related.
+ * (e.g. city page intros). Omits entries that do not look urgent-care-related.
  */
 
 const EXACT_PHRASE: Record<string, string> = {
-  dentist: "general dentists",
-  "general dentist": "general dentists",
-  dental: "general dental care",
-  "dental clinic": "dental clinics",
-  "dental hygienist": "dental hygienists",
-  "cosmetic dentist": "cosmetic dentists",
-  "pediatric dentist": "pediatric dentists",
-  "pediatric dentistry clinic": "pediatric dentistry clinics",
-  endodontist: "endodontists",
-  orthodontist: "orthodontists",
-  periodontist: "periodontists",
-  prosthodontist: "prosthodontists",
-  "oral surgeon": "oral surgeons",
-  "oral and maxillofacial surgeon": "oral and maxillofacial surgeons",
-  "dental implants periodontist": "implant and periodontal specialists",
-  "dental implants provider": "implant providers",
-  "emergency dental service": "emergency dental care",
-  "teeth whitening service": "teeth whitening",
-  "denture care center": "denture care",
-  "dental laboratory": "dental labs",
-  "dental radiology": "dental imaging",
-  "dental school": "dental education programs",
-  "dental supply store": "dental supplies",
-  dentiste: "dentists",
-  dentista: "dentists",
-  "dentista infantil": "pediatric dentists",
-  "dentista cosmético": "cosmetic dentists",
-  "dokter spesialis periodontis implan gigi": "implant and periodontal specialists",
-  "clínica dental": "dental clinics",
-  "cabinet dentaire": "dental practices",
-  "laboratorio dental": "dental labs",
+  "urgent care center": "urgent care centers",
+  "urgent care clinic": "urgent care clinics",
+  "walk-in clinic": "walk-in clinics",
+  "medical clinic": "medical clinics",
+  "community health centre": "community health centers",
+  "community health center": "community health centers",
+  "after hours clinic": "after-hours clinics",
+  "immediate care center": "immediate care centers",
+  "minor injuries unit": "minor injury units",
+  "emergency care physician": "emergency and urgent care physicians",
+  "family practice physician": "family medicine providers",
 };
 
-const DENTALISH =
-  /dental|dentist|dentiste|dentista|odontolog|orthodont|periodont|endodont|prosthodont|implan|teeth|denture|hygien|cosmetic|pediatric|maxillofacial|oral\s+surgeon|whiten|cabinet\s+dentaire|clínica\s+dental|laboratorio\s+dental/i;
+const URGENT_CARE_LIKE =
+  /urgent\s*care|walk-?in|after\s*hours|immediate\s*care|minor\s*injur|medical\s*clinic|community\s*health|primary\s*care|family\s*practice|pediatric/i;
 
-/** Labels that match "dent" but are not oral health (e.g. auto body). */
-const NON_DENTAL = /auto\s+dent|orthodox\s+church|student\s+dormitory|orthopedic|orthotics\s*&|dental\s+insurance\s+agency/i;
+/** Labels that match common noise but are not healthcare services. */
+const NON_URGENT_CARE =
+  /auto\s+repair|collision|transmission|student\s+dormitory|orthodox\s+church|storage\s+facility|insurance\s+agency/i;
 
 function normalizeKey(raw: string): string {
   return raw.trim().toLowerCase().replace(/\s+/g, " ");
@@ -60,7 +41,7 @@ function humanizeFallback(raw: string): string {
   if (s.endsWith(" center")) {
     return s.replace(/ center$/, " centers");
   }
-  if (s.endsWith("ist") && !s.endsWith("dentist")) {
+  if (s.endsWith("ist") && !s.endsWith("urgent care provider")) {
     return `${s}s`;
   }
   if (!s.endsWith("s")) {
@@ -72,9 +53,9 @@ function humanizeFallback(raw: string): string {
 function phraseForLabel(raw: string): string | null {
   const key = normalizeKey(raw);
   if (!key) return null;
-  if (NON_DENTAL.test(key)) return null;
+  if (NON_URGENT_CARE.test(key)) return null;
   if (EXACT_PHRASE[key]) return EXACT_PHRASE[key];
-  if (!DENTALISH.test(raw)) return null;
+  if (!URGENT_CARE_LIKE.test(raw)) return null;
   return humanizeFallback(raw);
 }
 
@@ -102,8 +83,6 @@ export function formatCareTypesClause(
     phrases.push(p);
     if (phrases.length >= maxItems) break;
   }
-  if (phrases.length === 0) {
-    return "including general and specialty dental care";
-  }
+  if (phrases.length === 0) return "including urgent care and walk-in services";
   return `including ${oxfordJoin(phrases)}`;
 }

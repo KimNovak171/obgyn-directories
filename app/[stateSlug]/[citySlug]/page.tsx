@@ -9,7 +9,7 @@ import {
   getOtherCitiesInState,
 } from "@/lib/stateFacilities";
 
-const siteUrl = "https://dentistrydirectories.com";
+const siteUrl = "https://urgentcaredirectories.com";
 
 type CityPageProps = {
   params: Promise<{ stateSlug: string; citySlug: string }>;
@@ -28,8 +28,8 @@ export async function generateMetadata({
   const { stateName, cityName, facilities: cityFacilities } =
     await getCityFacilities(safeState, safeCity);
   const count = Array.isArray(cityFacilities) ? cityFacilities.length : 0;
-  const title = `Dental Practices in ${cityName}, ${stateName} | Dentistry Directories`;
-  const description = `Find trusted dental care in ${cityName}, ${stateName}—browse ${count.toLocaleString()} verified practices with contact details, maps, and Google ratings so you can choose with confidence.`;
+  const title = `Urgent Care Clinics in ${cityName}, ${stateName} | Urgent Care Directories`;
+  const description = `Find trusted urgent care services in ${cityName}, ${stateName}—browse ${count.toLocaleString()} verified practices with contact details, maps, and Google ratings so you can choose with confidence.`;
 
   return {
     title,
@@ -44,14 +44,14 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalPath,
-      siteName: "DentistryDirectories.com",
+      siteName: "UrgentCareDirectories.com",
       type: "website",
       images: [
         {
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${cityName}, ${stateName} dental practice directory preview`,
+          alt: `${cityName}, ${stateName} urgent care clinic directory preview`,
         },
       ],
     },
@@ -108,7 +108,7 @@ export default async function CityPage({ params }: CityPageProps) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "DentistryDirectories.com",
+        name: "UrgentCareDirectories.com",
         item: `${siteUrl}/`,
       },
       {
@@ -129,33 +129,33 @@ export default async function CityPage({ params }: CityPageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Dental Practices in ${cityName}, ${stateName}`,
+    name: `Urgent Care Clinics in ${cityName}, ${stateName}`,
     url: `${siteUrl}/${stateSlugNorm}/${citySlugNorm}`,
     isPartOf: {
       "@type": "WebSite",
-      name: "DentistryDirectories.com",
+      name: "UrgentCareDirectories.com",
       url: `${siteUrl}/`,
     },
     about: [
       {
         "@type": "Thing",
-        name: `${cityName} dental practices`,
+        name: `${cityName} urgent care clinics`,
       },
       {
         "@type": "Thing",
-        name: `${stateName} dental services`,
+        name: `${stateName} urgent care services`,
       },
       {
         "@type": "Thing",
-        name: "General dentistry",
+        name: "General urgent care",
       },
       {
         "@type": "Thing",
-        name: "Dental care",
+        name: "Urgent care services",
       },
       {
         "@type": "Thing",
-        name: "Cosmetic dentistry",
+        name: "Minor injury treatment",
       },
       {
         "@type": "Thing",
@@ -180,19 +180,19 @@ export default async function CityPage({ params }: CityPageProps) {
       />
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          Dentists by city
+          Urgent Care Providers by city
         </p>
         <h1 className="text-3xl font-semibold text-navy">
-          Dental Practices in {cityName}, {stateName}
+          Urgent Care Clinics in {cityName}, {stateName}
         </h1>
         <p className="max-w-2xl text-sm text-slate-600">
-          {cityName} has {facilities.length.toLocaleString()} verified dental
+          {cityName} has {facilities.length.toLocaleString()} verified urgent care
           practices {careTypesClause}. Browse all options below, each with
           Google Maps profile links and ratings data where available.
         </p>
         <p className="max-w-2xl text-sm text-slate-600">
           Compare practices side by side, review services and contact details,
-          and find the right dental practice for you and your family in{" "}
+          and find the right urgent care clinic for you and your family in{" "}
           {stateName}.
         </p>
       </header>
