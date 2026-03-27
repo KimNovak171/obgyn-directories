@@ -1,28 +1,30 @@
 /**
  * Turn raw Google-style category labels into short, natural phrases for prose
- * (e.g. city page intros). Omits entries that do not look urgent-care-related.
+ * (e.g. city page intros). Omits entries that do not look OB-GYN– or women's-health–related.
  */
 
 const EXACT_PHRASE: Record<string, string> = {
-  "urgent care center": "urgent care centers",
-  "urgent care clinic": "urgent care clinics",
-  "walk-in clinic": "walk-in clinics",
+  "obstetrician-gynecologist": "obstetrician-gynecologists",
+  "obstetrician gynecologist": "obstetrician-gynecologists",
+  "gynecologist": "gynecologists",
+  "obstetrician": "obstetricians",
+  "women's health clinic": "women's health clinics",
+  "womens health clinic": "women's health clinics",
+  "reproductive health clinic": "reproductive health clinics",
+  "maternity care": "maternity care services",
+  "prenatal care": "prenatal care",
+  "family planning center": "family planning centers",
   "medical clinic": "medical clinics",
   "community health centre": "community health centers",
   "community health center": "community health centers",
-  "after hours clinic": "after-hours clinics",
-  "immediate care center": "immediate care centers",
-  "minor injuries unit": "minor injury units",
-  "emergency care physician": "emergency and urgent care physicians",
-  "family practice physician": "family medicine providers",
 };
 
-const URGENT_CARE_LIKE =
-  /urgent\s*care|walk-?in|after\s*hours|immediate\s*care|minor\s*injur|medical\s*clinic|community\s*health|primary\s*care|family\s*practice|pediatric/i;
+const OBGYN_WOMENS_HEALTH_LIKE =
+  /ob\s*-?\s*gyn|obstetr|gynecol|women'?s\s+health|maternity|prenatal|postpartum|reproductive\s+health|birth\s+control|family\s+planning|perinatal|pelvic|menopause|midwif/i;
 
-/** Labels that match common noise but are not healthcare services. */
-const NON_URGENT_CARE =
-  /auto\s+repair|collision|transmission|student\s+dormitory|orthodox\s+church|storage\s+facility|insurance\s+agency/i;
+/** Place / business labels that are never OB-GYN or women's health (filter noise from Maps categories). */
+const NON_RELEVANT =
+  /auto\s+repair|car\s+wash|car\s+dealer|gas\s+station|restaurant|cafe|coffee\s+shop|pizza|retail|grocery|supermarket|gym|fitness(\s+center)?|yoga\s+studio|hotel|motel|barber|beauty\s+salon|nail\s+salon|plumber|electrician|lawyer|attorney|bank|real\s+estate|church|synagogue|mosque|storage\s+facility|laundromat|parking\s+lot/i;
 
 function normalizeKey(raw: string): string {
   return raw.trim().toLowerCase().replace(/\s+/g, " ");
@@ -41,7 +43,7 @@ function humanizeFallback(raw: string): string {
   if (s.endsWith(" center")) {
     return s.replace(/ center$/, " centers");
   }
-  if (s.endsWith("ist") && !s.endsWith("urgent care provider")) {
+  if (s.endsWith("ist") && !s.endsWith("ob-gyn provider")) {
     return `${s}s`;
   }
   if (!s.endsWith("s")) {
@@ -53,9 +55,9 @@ function humanizeFallback(raw: string): string {
 function phraseForLabel(raw: string): string | null {
   const key = normalizeKey(raw);
   if (!key) return null;
-  if (NON_URGENT_CARE.test(key)) return null;
+  if (NON_RELEVANT.test(key)) return null;
   if (EXACT_PHRASE[key]) return EXACT_PHRASE[key];
-  if (!URGENT_CARE_LIKE.test(raw)) return null;
+  if (!OBGYN_WOMENS_HEALTH_LIKE.test(raw)) return null;
   return humanizeFallback(raw);
 }
 
@@ -83,6 +85,8 @@ export function formatCareTypesClause(
     phrases.push(p);
     if (phrases.length >= maxItems) break;
   }
-  if (phrases.length === 0) return "including urgent care and walk-in services";
+  if (phrases.length === 0) {
+    return "including OB-GYN and women's health services";
+  }
   return `including ${oxfordJoin(phrases)}`;
 }
