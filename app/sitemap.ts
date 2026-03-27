@@ -6,6 +6,7 @@ const siteUrl = "https://obgyndirectories.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  /** US state + city URLs come from `getDirectoryIndex()` (all `data/*_facilities.json` US files). */
   const [directory, canadaDirectory] = await Promise.all([
     getDirectoryIndex(),
     getCanadaDirectoryIndex(),

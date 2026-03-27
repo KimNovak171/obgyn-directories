@@ -1,3 +1,9 @@
+/**
+ * US facility data: every `data/{slug}_facilities.json` (except Canadian province slugs)
+ * is discovered at module load and read in one batch. Each file uses `fs.readFileSync`
+ * inside `try/catch`; any error or empty normalized payload yields `[]` for that state only.
+ * Never hardcode per-state empty arrays in source — only these dynamic fallbacks.
+ */
 import type { Facility } from "@/components/FacilityCard";
 import fs from "fs";
 import path from "path";

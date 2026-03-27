@@ -7,8 +7,8 @@ import { getDirectoryIndex, getStateSummary, getGlobalStats } from "@/lib/stateF
 export async function generateMetadata(): Promise<Metadata> {
   const stats = getGlobalStats();
   const total = stats.totalFacilities.toLocaleString();
-  const title = `OB-GYN & Women's Health Directory — USA & Canada | ${total} verified practices`;
-  const description = `Browse ${total} verified OB-GYN and women's health practices across the United States and Canada — all rated 3 stars or higher on Google Maps.`;
+  const title = `OB-GYN & Women's Health Directory — USA | ${total} verified practices`;
+  const description = `Browse ${total} verified OB-GYN and women's health practices across all US states and DC — all rated 3 stars or higher on Google Maps.`;
 
   return {
     title,
@@ -73,11 +73,11 @@ export default async function Home() {
               OB-GYN Directories
             </p>
             <h1 className="text-balance text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-              Find Trusted OB-GYN &amp; Women's Health Practices — US States &amp; Canadian Provinces
+              Find Trusted OB-GYN &amp; Women's Health Practices — All US States &amp; DC
             </h1>
             <p className="max-w-2xl text-balance text-sm sm:text-base text-foreground/80">
-              Verified OB-GYN and women's health providers across the United States and Canada—browse by
-              state or province, then by city. Every practice rated 3★ or higher
+              Verified OB-GYN and women's health providers in every state and the District of Columbia—browse by
+              state, then by city. Every practice rated 3★ or higher
               on Google Maps.
             </p>
           </div>
@@ -186,7 +186,7 @@ export default async function Home() {
       </p>
 
       <section className="mt-8 border-y-2 border-teal/30 bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-5 lg:px-8">
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
               Verified OB-GYN practices
@@ -197,7 +197,15 @@ export default async function Home() {
           </div>
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Cities Covered
+              US states &amp; DC
+            </p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
+              {usStatesSorted.length.toLocaleString()}
+            </p>
+          </div>
+          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+              Cities covered
             </p>
             <p className="mt-2 text-2xl font-semibold text-foreground">
               {globalStats.totalCities.toLocaleString()}
@@ -205,7 +213,7 @@ export default async function Home() {
           </div>
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Average Rating
+              Average rating
             </p>
             <p className="mt-2 text-2xl font-semibold text-foreground">
               {globalStats.averageRating != null
@@ -213,11 +221,11 @@ export default async function Home() {
                 : "—"}
             </p>
           </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm sm:col-span-2 lg:col-span-1">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Quality Standard
+              Quality standard
             </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">3★ Minimum</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">3★ minimum</p>
           </div>
         </div>
       </section>
@@ -236,8 +244,7 @@ export default async function Home() {
                 Choose your state
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Start with Florida or California to access complete state
-                directories.
+                Open any state below for a full directory of cities and practices.
               </p>
             </div>
             <div className="rounded-xl border-l-4 border-teal border border-surface-muted bg-surface p-5 shadow-sm">
