@@ -7,8 +7,8 @@ import { getDirectoryIndex, getStateSummary, getGlobalStats } from "@/lib/stateF
 export async function generateMetadata(): Promise<Metadata> {
   const stats = getGlobalStats();
   const total = stats.totalFacilities.toLocaleString();
-  const title = `OB-GYN & Women's Health Directory — USA | ${total} verified practices`;
-  const description = `Browse ${total} verified OB-GYN and women's health practices across all US states and DC — all rated 3 stars or higher on Google Maps.`;
+  const title = `OB-GYN & Women's Health Directory — USA & Canada | ${total} verified practices`;
+  const description = `Browse ${total} verified OB-GYN and women's health practices across the United States, DC, and Canada — all rated 3 stars or higher on Google Maps.`;
 
   return {
     title,
@@ -73,11 +73,11 @@ export default async function Home() {
               OB-GYN Directories
             </p>
             <h1 className="text-balance text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-              Find Trusted OB-GYN &amp; Women's Health Practices — All US States &amp; DC
+              Find Trusted OB-GYN &amp; Women's Health Practices — US States, DC &amp; Canada
             </h1>
             <p className="max-w-2xl text-balance text-sm sm:text-base text-foreground/80">
-              Verified OB-GYN and women's health providers in every state and the District of Columbia—browse by
-              state, then by city. Every practice rated 3★ or higher
+              Verified OB-GYN and women's health providers across the United States, the District of Columbia, and
+              Canadian provinces—browse by state or province, then by city. Every practice rated 3★ or higher
               on Google Maps.
             </p>
           </div>
@@ -186,7 +186,7 @@ export default async function Home() {
       </p>
 
       <section className="mt-8 border-y-2 border-teal/30 bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-5 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-6 lg:px-8">
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
               Verified OB-GYN practices
@@ -194,6 +194,7 @@ export default async function Home() {
             <p className="mt-2 text-2xl font-semibold text-foreground">
               {globalStats.totalFacilities.toLocaleString()}
             </p>
+            <p className="mt-1 text-[11px] text-foreground/70">US &amp; Canada</p>
           </div>
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
@@ -201,6 +202,14 @@ export default async function Home() {
             </p>
             <p className="mt-2 text-2xl font-semibold text-foreground">
               {usStatesSorted.length.toLocaleString()}
+            </p>
+          </div>
+          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+              Canadian provinces
+            </p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
+              {canadaDirectory.length.toLocaleString()}
             </p>
           </div>
           <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
@@ -221,7 +230,7 @@ export default async function Home() {
                 : "—"}
             </p>
           </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm sm:col-span-2 lg:col-span-1">
+          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm sm:col-span-2 lg:col-span-1 xl:col-span-1">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal">
               Quality standard
             </p>
@@ -241,10 +250,10 @@ export default async function Home() {
                 1️⃣
               </p>
               <h3 className="mt-3 text-lg font-semibold text-foreground">
-                Choose your state
+                Choose your state or province
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Open any state below for a full directory of cities and practices.
+                Open any US state or Canadian province below for cities and practices.
               </p>
             </div>
             <div className="rounded-xl border-l-4 border-teal border border-surface-muted bg-surface p-5 shadow-sm">

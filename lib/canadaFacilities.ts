@@ -3,12 +3,15 @@ import fs from "fs";
 import path from "path";
 
 /**
- * All provinces & territories that may have `data/{slug}_facilities.json`.
- * `discoverCanadaProvinceSlugsFromData()` finds which of these files exist and
- * loads each in one batch (`readFileSync` + try/catch → [] per file).
- * Maps: with `place_id`, `https://www.google.com/maps/place/?q=place_id:{place_id}`
- * (full `q` value is URI-encoded). If `place_id` is missing/empty, fall back to
- * `https://www.google.com/maps/search/?api=1&query={encoded_address}`.
+ * Canadian OB-GYN data: all allowed province/territory JSON basenames are listed below.
+ * At module load, `discoverCanadaProvinceSlugsFromData()` finds which files exist under
+ * `data/`, then each is loaded in one batch via `loadCanadaProvinceRawArray` →
+ * `fs.readFileSync` inside `try/catch` → `[]` on failure (never hardcoded empty arrays).
+ *
+ * Google Maps URLs for listings:
+ * - With `place_id`: `https://www.google.com/maps/place/?q=place_id:{place_id}`
+ *   (`q` is URI-encoded as `encodeURIComponent('place_id:' + id)`).
+ * - Without `place_id`: `https://www.google.com/maps/search/?api=1&query={encoded_address}`.
  */
 const ALL_CANADA_PROVINCE_SLUGS = [
   "alberta",
@@ -93,6 +96,8 @@ type CanadaFacilityRaw = {
   rating?: number | null;
   reviews?: number | null;
   place_id?: string | null;
+  /** Alternate export key for Google Place ID */
+  placeId?: string | null;
   recommended?: boolean;
   featured?: boolean;
   premium?: boolean;
@@ -175,6 +180,7 @@ function buildCanadaMapsUrl(
 ): string | undefined {
   const pid = (placeId ?? "").trim();
   if (pid) {
+    // https://www.google.com/maps/place/?q=place_id:{place_id} (q encoded)
     const q = `place_id:${pid}`;
     return `https://www.google.com/maps/place/?q=${encodeURIComponent(q)}`;
   }
@@ -200,7 +206,8 @@ function transformCanadaFacilities(
     const addressLine2 =
       addressParts.length > 1 ? addressParts.slice(1).join(", ") : undefined;
     const fullAddress = (f.address ?? "").trim();
-    const mapsUrl = buildCanadaMapsUrl(f.place_id, fullAddress);
+    const resolvedPlaceId = (f.place_id ?? f.placeId ?? "").trim() || null;
+    const mapsUrl = buildCanadaMapsUrl(resolvedPlaceId, fullAddress);
     return {
       id,
       name: f.name,
@@ -225,6 +232,7 @@ function transformCanadaFacilities(
   });
 }
 
+/** In-memory batch: one entry per discovered province file (empty arrays allowed). */
 const PROVINCE_DATA: Record<string, CanadaRawFacility[]> = {};
 for (const slug of discoverCanadaProvinceSlugsFromData()) {
   const raw = loadCanadaProvinceRawArray(slug);
