@@ -82,6 +82,60 @@ export default async function Home() {
             </p>
           </div>
 
+          <section className="border-y-2 border-teal/30 bg-surface">
+            <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-6 lg:px-8">
+              <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                  Verified OB-GYN practices
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {globalStats.totalFacilities.toLocaleString()}
+                </p>
+                <p className="mt-1 text-[11px] text-foreground/70">US &amp; Canada</p>
+              </div>
+              <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                  US states &amp; DC
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {usStatesSorted.length.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                  Canadian provinces
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {canadaDirectory.length.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                  Cities covered
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {globalStats.totalCities.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                  Average rating
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {globalStats.averageRating != null
+                    ? `${globalStats.averageRating}★`
+                    : "—"}
+                </p>
+              </div>
+              <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm sm:col-span-2 lg:col-span-1 xl:col-span-1">
+                <p className="text-xs font-semibold uppercase tracking-wide text-teal">
+                  Quality standard
+                </p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">3★ minimum</p>
+              </div>
+            </div>
+          </section>
+
           <div className="w-full rounded-2xl border-2 border-teal/40 bg-surface p-6 shadow-xl shadow-navy/20 ring-1 ring-teal/30">
             <h2 className="text-xl font-semibold text-foreground">
               Start with a state directory
@@ -184,60 +238,6 @@ export default async function Home() {
         </a>
         .
       </p>
-
-      <section className="mt-8 border-y-2 border-teal/30 bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-6 lg:px-8">
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Verified OB-GYN practices
-            </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
-              {globalStats.totalFacilities.toLocaleString()}
-            </p>
-            <p className="mt-1 text-[11px] text-foreground/70">US &amp; Canada</p>
-          </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              US states &amp; DC
-            </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
-              {usStatesSorted.length.toLocaleString()}
-            </p>
-          </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Canadian provinces
-            </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
-              {canadaDirectory.length.toLocaleString()}
-            </p>
-          </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Cities covered
-            </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
-              {globalStats.totalCities.toLocaleString()}
-            </p>
-          </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Average rating
-            </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
-              {globalStats.averageRating != null
-                ? `${globalStats.averageRating}★`
-                : "—"}
-            </p>
-          </div>
-          <div className="rounded-xl border-2 border-teal/30 bg-surface p-4 text-center shadow-sm sm:col-span-2 lg:col-span-1 xl:col-span-1">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal">
-              Quality standard
-            </p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">3★ minimum</p>
-          </div>
-        </div>
-      </section>
 
       <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
